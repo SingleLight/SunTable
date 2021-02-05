@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {newArray} from '@angular/compiler/src/util';
 
 
 @Component({
@@ -59,16 +60,22 @@ export class AppComponent {
     }
   }
   generate(): void{ // generate outputFeatureMatrix and outputFeatureName, target is represented as an index
-    let trans = this.transpose(this.linesR);
-    for (let i = 0; i < this.features; i++){
+    const featureIndex = [];
+    for (let i = 0; i < this.featureSelect.length; i++){
       if (this.featureSelect[i]){
-        this.outputFeatureMatrix.push(trans[i]);
-        this.outputFeatureName.push(this.featureArray[i]);
+        this.outputFeatureMatrix.push([]);
+        featureIndex.push(i);
+      }
+    }
+    for (let j = 0; j < featureIndex.length; j++){
+      for (let i = 0; i < this.dataPoints; i++){
+        this.outputFeatureMatrix[j].push(this.linesR[0][i][featureIndex[j]]);
       }
     }
     console.log(this.outputFeatureMatrix); // see the matrix in debug console
+    const a = [[1, 2], [3, 4]];
   }
-  transpose = m => m[0].map((x, i) => m.map(x => x[i]));
+
 
 
 }
