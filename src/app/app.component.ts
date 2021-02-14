@@ -9,6 +9,7 @@ import {newArray} from '@angular/compiler/src/util';
 })
 export class AppComponent {
   title = 'sun';
+  editField: string;
   lines = []; // header
   linesR = []; // body
   isChecked: boolean;
@@ -59,6 +60,13 @@ export class AppComponent {
       };
     }
   }
+  changeValue(row: number, column: number, event: any): void{
+    this.editField = event.target.textContent;
+  }
+  updateList(row: number, column: number, event: any): void {
+    const editField = event.target.textContent;
+    this.linesR[0][row][column] = editField;
+  }
   generate(): void{ // generate outputFeatureMatrix and outputFeatureName, target is represented as an index
     const featureIndex = [];
     for (let i = 0; i < this.featureSelect.length; i++){
@@ -73,7 +81,6 @@ export class AppComponent {
       }
     }
     console.log(this.outputFeatureMatrix); // see the matrix in debug console
-    const a = [[1, 2], [3, 4]];
   }
 
 
