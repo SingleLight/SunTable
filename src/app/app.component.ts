@@ -8,7 +8,7 @@ import {Component} from '@angular/core';
 })
 export class AppComponent {
   title = 'sun';
-  editField: string;
+  editField = '';
   lines = []; // header
   linesR = []; // body
   isChecked: boolean;
@@ -50,7 +50,7 @@ export class AppComponent {
         for (let i = 1; i < arrl; i++) {
           rows.push(allTextLines[i].split(','));
         }
-        for (let j = 0; j < arrl; j++) {
+        for (let j = 0; j < arrl - 1; j++) {
           tarrR.push(rows[j]);
         }
         this.linesR.push(tarrR);
@@ -84,6 +84,7 @@ export class AppComponent {
       if (this.featureSelect[i]){
         this.outputFeatureMatrix.push([]);
         featureIndex.push(i);
+        this.outputFeatureName.push(this.featureArray[i]);
       }
     }
     for (let j = 0; j < featureIndex.length; j++){
@@ -93,7 +94,4 @@ export class AppComponent {
     }
     console.log(this.outputFeatureMatrix); // see the matrix in debug console
   }
-
-
-
 }
