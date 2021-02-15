@@ -1,5 +1,4 @@
-import { Component } from '@angular/core';
-import {newArray} from '@angular/compiler/src/util';
+import {Component} from '@angular/core';
 
 
 @Component({
@@ -66,6 +65,18 @@ export class AppComponent {
   updateList(row: number, column: number, event: any): void {
     const editField = event.target.textContent;
     this.linesR[0][row][column] = editField;
+  }
+  remove(row: number): void {
+    this.linesR[0].splice(row, 1);
+    this.dataPoints--;
+  }
+  add(): void {
+    this.dataPoints++;
+    const tempRow = [];
+    for (let i = 0; i < this.features; i++){
+      tempRow.push(this.linesR[0][0][i]);
+    }
+    this.linesR[0].unshift(tempRow);
   }
   generate(): void{ // generate outputFeatureMatrix and outputFeatureName, target is represented as an index
     const featureIndex = [];

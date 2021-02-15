@@ -6,18 +6,27 @@
     <h2>Table input</h2>
     <input class="form-control" type="file" class="upload" (change)="changeListener($event.target.files)" name="">
   </div>
-  <table class="table table-bordered mt-5">
+  <span *ngIf="features" class="table-add float-right mb-3 mr-2">
+        <button class="btn-primary mt-3" (click)="add()">Add row</button>
+  </span>
+  <table class="table table-bordered table-editable mt-5">
     <thead>
-    <tr>
-      <th *ngFor="let item of lines[0]">{{item}}</th>
-    </tr>
+      <tr>
+        <th *ngFor="let item of lines[0]">{{item}}</th>
+        <th *ngIf="features">Remove</th>
+      </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let row of linesR[0]; index as j">
-      <td *ngFor="let data of row; index as ind">
-        <span (keyup)="changeValue(j, ind, $event)" (blur)="updateList(j, ind, $event)" contenteditable="true">{{data}}</span>
-      </td>
-    </tr>
+      <tr *ngFor="let row of linesR[0]; index as j">
+        <td *ngFor="let data of row; index as ind">
+          <span (keyup)="changeValue(j, ind, $event)" (blur)="updateList(j, ind, $event)" contenteditable="true">{{data}}</span>
+        </td>
+        <td *ngIf="dataPoints>j">
+            <span class="table-remove">
+              <button class="btn-danger" (click)="remove(j)">Remove</button>
+            </span>
+        </td>
+      </tr>
     </tbody>
   </table>
   <p *ngIf="features != null">Features: {{features}}</p>
