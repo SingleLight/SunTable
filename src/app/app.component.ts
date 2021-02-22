@@ -32,7 +32,7 @@ export class AppComponent {
       reader.onload = (e) => {
         const csv: any = reader.result;
         let allTextLines = [];
-        allTextLines = csv.split(/\r|\n|\r/);
+        allTextLines = csv.split(/\n/);
         const headers = allTextLines[0].split(',');
         for (const entry of headers){
           this.featureSelect.push(false);
